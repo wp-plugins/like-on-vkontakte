@@ -3,11 +3,11 @@
 	Plugin Name: Like in Vkontakte
 	Version: 0.3
 	Plugin URI: http://blog.chekalskiy.ru/post/647/
-	Description: Add like button from social network VKontakte (vkontakte.ru, vk.com).
-	Author: chekalskiy.ru, Ilya Chekaslkiy
-	Author URI: http://chekalskiy.ru/
+	Description: Добавляет к постам виджет "Мне нравится" из ВКонтакте.
+	Author: Ilya Chekaslkiy
+	Author URI: http://www.chekalskiy.ru/
 
-	Based on "Share on Vkontakte Plugin"
+	Основан на "Share on Vkontakte Plugin"
 	*/
 
 
@@ -27,10 +27,10 @@
 
 
 		if ($_POST['action']){ ?>
-			<div id="message" class="updated fade"><p><strong>Options saved.</strong></p></div>
+			<div id="message" class="updated fade"><p><strong>Настройки сохранены.</strong></p></div>
 		<?php } ?>
 		<div class="wrap" id="like-in-vkontakte-options">
-			<h2>Like in Vkontakte Plugin Options</h2>
+			<h2>Настройки плагина Like in Vkontakte</h2>
 
 			<form method="post" action="<?php echo $_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']; ?>">
 				<fieldset>
@@ -40,27 +40,27 @@
 						<colgroup width="*" align="left" valign="top" span="1" />
 						<tr><td colspan="2">&nbsp;</td></tr>
 						<tr>
-							<td valign="top">Display</td>
-							<td><input type="checkbox" name="in_post" value="1" <?php echo ($in_post)?' checked="checked"':''; ;?> /> <label for="in_post">On posts</label></td>
+							<td valign="top">Отображать</td>
+							<td><input type="checkbox" name="in_post" value="1" <?php echo ($in_post)?' checked="checked"':''; ;?> /> <label for="in_post">В постах</label></td>
 						</tr>
 						<tr>
 							<td valign="top"></td>
-							<td><input type="checkbox" name="in_frontpage" value="1" <?php echo ($in_frontpage)?' checked="checked"':''; ;?> /> <label for="in_frontpage">On frontpage (home)</label></td>
+							<td><input type="checkbox" name="in_frontpage" value="1" <?php echo ($in_frontpage)?' checked="checked"':''; ;?> /> <label for="in_frontpage">На главной</label></td>
 						</tr>
 						<tr>
 							<td valign="top"></td>
-							<td><input type="checkbox" name="in_arhives" value="1" <?php echo ($in_arhives)?' checked="checked"':''; ;?> /> <label for="in_arhives">On archives (category, tag, search)</label></td>
+							<td><input type="checkbox" name="in_arhives" value="1" <?php echo ($in_arhives)?' checked="checked"':''; ;?> /> <label for="in_arhives">В архивах (категория, тэги, поиск)</label></td>
 						</tr>
 						<tr>
 							<td valign="top"></td>
-							<td><input type="checkbox" name="in_page" value="1" <?php echo ($in_page)?' checked="checked"':''; ;?> /> <label for="in_page">On pages</label></td>
+							<td><input type="checkbox" name="in_page" value="1" <?php echo ($in_page)?' checked="checked"':''; ;?> /> <label for="in_page">На страницах</label></td>
 						</tr>
 						<tr><td colspan="2">&nbsp;</td></tr>
 						<tr>
-							<td valign="top"><label for="align_vertical">Insertion on Post:</label></td>
+							<td valign="top"><label for="align_vertical">Вставлять в запись:</label></td>
 							<td><select name="align_vertical" style="width: 250px;">
-							<option value ="top" <?php if ($align_vertical === "top") echo 'selected="selected"';?>>Top</option>
-							<option value ="bottom"<?php if ($align_vertical === "bottom") echo 'selected="selected"';?>>Bottom</option>
+							<option value ="top" <?php if ($align_vertical === "top") echo 'selected="selected"';?>>Сверху</option>
+							<option value ="bottom"<?php if ($align_vertical === "bottom") echo 'selected="selected"';?>>Снизу</option>
 							</select></td>
 						</tr>
 						<tr><td colspan="2">&nbsp;</td></tr>
@@ -70,35 +70,35 @@
 						</tr>
 						<tr><td colspan="2">&nbsp;</td></tr>
 						<tr>
-							<td valign="top"><label for="addtype">Add type:</label></td>
+							<td valign="top"><label for="addtype">Добавлять:</label></td>
 							<td><select name="addtype" style="width: 250px;">
-							<option value ="auto" <?php if ($addtype === "auto") echo 'selected="selected"';?>>Auto</option>
-							<option value ="manual"<?php if ($addtype === "manual") echo 'selected="selected"';?>>Manual</option>
+							<option value ="auto" <?php if ($addtype === "auto") echo 'selected="selected"';?>>Автоматически</option>
+							<option value ="manual"<?php if ($addtype === "manual") echo 'selected="selected"';?>>Вручную</option>
 							</select></td>
 						</tr>
 						<tr><td colspan="2">&nbsp;</td></tr>
 						<tr><td colspan="2"><hr /></td></tr>
-						<tr><td colspan="2"><h2>Vkontakte Button Options</h2></td></tr>
+						<tr><td colspan="2"><h2>Настройки виджета</h2></td></tr>
 						<tr><td colspan="2">&nbsp;</td></tr>
 						<tr><td colspan="2">&nbsp;</td></tr>
 						<tr>
-							<td valign="top"><label for="btn_width">Button Width</label></td>
+							<td valign="top"><label for="btn_width">Ширина области</label></td>
 							<td><input type="text" name="btn_width" style="width: 250px;" value="<?php echo ($btn_width); ;?>" /></td>
 						</tr>
 						<tr>
-							<td valign="top"><label for="app_id">Application ID</label></td>
+							<td valign="top"><label for="app_id">ID приложения</label></td>
 							<td><input type="text" name="app_id" style="width: 250px;" value="<?php echo ($app_id); ;?>" /></td>
 						</tr>
 					</table>
 				</fieldset>
 				<p class="submit">
-					<input type="submit" name="Submit" value="Update Options &raquo;" />
+					<input type="submit" name="Submit" value="Сохранить настройки &raquo;" />
 				</p>
 			</form>
 			<ul>
-				<li>Use &lt;!--vklike--&gt; for manual adding button on a page.</li>
-				<li>Use class "vklike" for design button.</li>
-				<li>© <a href="http://chekalskiy.ru/" target="_blank">Чекальский Илья</a>.</li>
+				<li>Для ручного добавления виджета необходимо вставить &lt;!--vklike--&gt; в текст поста.</li>
+				<li>Настраивать внешний вид кнопки можно с помощью класса "vklike".</li>
+				<li>© <a href="http://www.chekalskiy.ru/" target="_blank">Чекальский Илья</a>.</li>
 			</ul>
 		</div>
 	<?php
