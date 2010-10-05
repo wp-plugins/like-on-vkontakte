@@ -1,7 +1,7 @@
 	<?php
 	/*
 	Plugin Name: Like in Vkontakte
-	Version: 0.2
+	Version: 0.3
 	Plugin URI: http://blog.chekalskiy.ru/post/647/
 	Description: Add like button from social network VKontakte (vkontakte.ru, vk.com).
 	Author: chekalskiy.ru, Ilya Chekaslkiy
