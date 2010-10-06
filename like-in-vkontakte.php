@@ -1,7 +1,7 @@
 	<?php
 	/*
 	Plugin Name: Like in Vkontakte
-	Version: 0.3
+	Version: 0.4
 	Plugin URI: http://blog.chekalskiy.ru/post/647/
 	Description: Добавляет к постам виджет "Мне нравится" из ВКонтакте.
 	Author: Ilya Chekaslkiy
