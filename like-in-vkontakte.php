@@ -1,4 +1,4 @@
-	<?php
+<?php
 	/*
 	Plugin Name: Like in Vkontakte
 	Version: 0.4
