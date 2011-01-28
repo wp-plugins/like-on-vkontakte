@@ -1,7 +1,7 @@
 <?php
 	/*
 	Plugin Name: Like in Vkontakte
-	Version: 0.5
+	Version: 0.5.1
 	Plugin URI: http://blog.chekalskiy.ru/post/647/
 	Description: Добавляет к постам виджет "Мне нравится" из ВКонтакте.
 	Author: Ilya Chekaslkiy
@@ -159,9 +159,11 @@
 		$id_post = get_the_ID();
 		$pageDesc = (get_post_meta($id_post, 'description', true) != '') ? trim(stripslashes(get_post_meta($id_post, 'description', true))) : get_bloginfo('description');
 		$vk = "<div id=\"vk_like{$id_post}\"{$style} class=\"vklike\"></div>
-			<!--<script type=\"text/javascript\">
-				VK.Widgets.Like(\"vk_like{$id_post}\", {width: \"{$btn_width}\", pageTitle: '".the_title('', '', false)."', pageUrl: '".get_permalink($post->ID)."', page_id: {$id_post}, pageDescription: {$pageDesc}});
-			</script>-->";
+			<script type=\"text/javascript\">
+				/* <![CDATA[ */
+				VK.Widgets.Like(\"vk_like{$id_post}\", {width: \"{$btn_width}\", pageTitle: '".the_title('', '', false)."', pageUrl: '".get_permalink($post->ID)."', page_id: {$id_post}, pageDescription: \"{$pageDesc}\"});
+				/* ]]> */
+			</script>";
 		
 		if (
 				(is_home() && $in_frontpage) ||
