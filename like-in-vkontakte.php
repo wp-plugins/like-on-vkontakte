@@ -1,7 +1,7 @@
 <?php
 	/*
 	Plugin Name: Like in Vkontakte
-	Version: 0.4
+	Version: 0.5
 	Plugin URI: http://blog.chekalskiy.ru/post/647/
 	Description: Добавляет к постам виджет "Мне нравится" из ВКонтакте.
 	Author: Ilya Chekaslkiy
@@ -129,7 +129,7 @@
 	function like_in_vkontakte_add_js ($str) {
 		$current_options = get_option('like_in_vkontakte_options');
 		$app_id = intval($current_options["app_id"]);	
-		echo '<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?1"></script>
+		echo '<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?20"></script>
 		<script type="text/javascript">
 		  VK.init({apiId: '.$app_id.', onlyWidgets: true});
 		</script>';
@@ -157,10 +157,11 @@
 		
 		$btn_width = ($btn_width)?$btn_width:'496';
 		$id_post = get_the_ID();
+		$pageDesc = (get_post_meta($id_post, 'description', true) != '') ? trim(stripslashes(get_post_meta($id_post, 'description', true))) : get_bloginfo('description');
 		$vk = "<div id=\"vk_like{$id_post}\"{$style} class=\"vklike\"></div>
-			<script type=\"text/javascript\">
-				VK.Widgets.Like(\"vk_like{$id_post}\", {width: \"{$btn_width}\", pageTitle: '".the_title('', '', false)."', pageUrl: '".get_permalink($post->ID)."', page_id: {$id_post}});
-			</script>";
+			<!--<script type=\"text/javascript\">
+				VK.Widgets.Like(\"vk_like{$id_post}\", {width: \"{$btn_width}\", pageTitle: '".the_title('', '', false)."', pageUrl: '".get_permalink($post->ID)."', page_id: {$id_post}, pageDescription: {$pageDesc}});
+			</script>-->";
 		
 		if (
 				(is_home() && $in_frontpage) ||
@@ -207,4 +208,4 @@
 	add_action('admin_menu', 'like_in_vkontakte_add_options_page');
 	add_action('the_content', 'like_in_vkontakte_add_to_page');
 
-	?>
+?>
