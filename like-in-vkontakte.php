@@ -1,13 +1,14 @@
 <?php
 	/*
-	Plugin Name: Like in Vkontakte
-	Version: 0.5.1
-	Plugin URI: http://blog.chekalskiy.ru/post/647/
-	Description: Добавляет к постам виджет "Мне нравится" из ВКонтакте.
-	Author: Ilya Chekaslkiy
+	Plugin Name: Like in Vk.com
+	Version: 0.5.2
+	Plugin URI: http://wordpress.org/extend/plugins/like-on-vkontakte/
+	Description: Добавляет к постам виджет «Мне нравится» из социальной сети ВКонтакте (vk.com).
+	Author: Ilya Chekalskiy
 	Author URI: http://www.chekalskiy.ru/
 
-	Основан на "Share on Vkontakte Plugin"
+	This plugin adds like button of social network VK.com to your posts.
+	Основан на «Share on Vkontakte Plugin».
 	*/
 
 
@@ -15,16 +16,16 @@
 	function like_in_vkontakte_options_page() {
 		$current_options = get_option('like_in_vkontakte_options');
 		
-		$in_page =  $current_options["in_page"];
-		$in_post =  $current_options["in_post"];
-		$in_frontpage =  $current_options["in_frontpage"];
-		$in_arhives =  $current_options["in_arhives"];
-		$align_vertical =  $current_options["align_vertical"];
-		$css =  $current_options["css"];
-		$addtype =  $current_options["addtype"];
-		$btn_width =  $current_options["btn_width"];
-		$app_id =  $current_options["app_id"];
-
+		$in_page        = $current_options["in_page"];
+		$in_post        = $current_options["in_post"];
+		$in_frontpage   = $current_options["in_frontpage"];
+		$in_arhives     = $current_options["in_arhives"];
+		$align_vertical = $current_options["align_vertical"];
+		$css            = $current_options["css"];
+		$addtype        = $current_options["addtype"];
+		$btn_width      = $current_options["btn_width"];
+		$btn_height     = $current_options["btn_height"];
+		$app_id         = $current_options["app_id"];
 
 		if ($_POST['action']){ ?>
 			<div id="message" class="updated fade"><p><strong>Настройки сохранены.</strong></p></div>
@@ -86,6 +87,10 @@
 							<td><input type="text" name="btn_width" style="width: 250px;" value="<?php echo ($btn_width); ;?>" /></td>
 						</tr>
 						<tr>
+							<td valign="top"><label for="btn_height">Высота виджета (18, 20, 22, 24)</label></td>
+							<td><input type="text" name="btn_height" style="width: 250px;" value="<?php echo ($btn_height); ;?>" /></td>
+						</tr>
+						<tr>
 							<td valign="top"><label for="app_id">ID приложения</label></td>
 							<td><input type="text" name="app_id" style="width: 250px;" value="<?php echo ($app_id); ;?>" /></td>
 						</tr>
@@ -119,6 +124,7 @@
 		$like_in_vkontakte_options["css"] =  $_POST["css"];
 		$like_in_vkontakte_options["addtype"] =  $_POST["addtype"];
 		$like_in_vkontakte_options["btn_width"] =  $_POST["btn_width"];
+		$like_in_vkontakte_options["btn_height"] =  $_POST["btn_height"];
 		$like_in_vkontakte_options["app_id"] =  $_POST["app_id"];
 
 
@@ -129,7 +135,7 @@
 	function like_in_vkontakte_add_js ($str) {
 		$current_options = get_option('like_in_vkontakte_options');
 		$app_id = intval($current_options["app_id"]);	
-		echo '<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?20"></script>
+		echo '<script src="http://vkontakte.ru/js/api/openapi.js" type="text/javascript" charset="windows-1251"></script>
 		<script type="text/javascript">
 		  VK.init({apiId: '.$app_id.', onlyWidgets: true});
 		</script>';
@@ -148,6 +154,7 @@
 		$css =  $current_options["css"];
 		$addtype =  $current_options["addtype"];
 		$btn_width =  $current_options["btn_width"];
+		$btn_height =  $current_options["btn_height"];
 		$app_id =  $current_options["app_id"];
 
 		$style = '';
@@ -156,12 +163,13 @@
 		$style ='style="'.$style.$css.'"';
 		
 		$btn_width = ($btn_width)?$btn_width:'496';
+		$btn_height = ($btn_height)?$btn_height:'22';
 		$id_post = get_the_ID();
 		$pageDesc = (get_post_meta($id_post, 'description', true) != '') ? trim(stripslashes(get_post_meta($id_post, 'description', true))) : get_bloginfo('description');
 		$vk = "<div id=\"vk_like{$id_post}\"{$style} class=\"vklike\"></div>
 			<script type=\"text/javascript\">
 				/* <![CDATA[ */
-				VK.Widgets.Like(\"vk_like{$id_post}\", {width: \"{$btn_width}\", pageTitle: '".the_title('', '', false)."', pageUrl: '".get_permalink($post->ID)."', page_id: {$id_post}, pageDescription: \"{$pageDesc}\"});
+				VK.Widgets.Like(\"vk_like{$id_post}\", { width: \"{$btn_width}\", height: \"{$btn_height}\", pageTitle: '".the_title('', '', false)."', pageUrl: '".get_permalink($post->ID)."', page_id: {$id_post}, pageDescription: \"{$pageDesc}\" });
 				/* ]]> */
 			</script>";
 		
@@ -197,6 +205,7 @@
 		$like_in_vkontakte_options["css"] = 'display:inline;margin: 5px 0;'; // css inline
 		$like_in_vkontakte_options["addtype"] = 'auto'; // auto or manual
 		$like_in_vkontakte_options["btn_width"] =  '496';
+		$like_in_vkontakte_options["btn_height"] =  '22';
 		$like_in_vkontakte_options["app_id"] =  '';
 
 		update_option('like_in_vkontakte_options', $like_in_vkontakte_options);
@@ -209,5 +218,3 @@
 	add_action('wp_head', 'like_in_vkontakte_add_js');
 	add_action('admin_menu', 'like_in_vkontakte_add_options_page');
 	add_action('the_content', 'like_in_vkontakte_add_to_page');
-
-?>
